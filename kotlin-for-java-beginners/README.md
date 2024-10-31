@@ -53,8 +53,8 @@
     var number3: Long? = null;
     ```
 
-  > **코틀린은 기본적으로 모두 nullable하다.**
-  nullable을 표시하려면 `타입?` 형태로 명시해야한다.
+  > **코틀린은 기본적으로 모두 non-null이다.**  
+  > nullable을 표시하려면 `타입?` 형태로 명시해야한다.
 
 - kotlin의 객체 생성
     - new를 사용하면 안된다.
@@ -136,10 +136,10 @@ fun startWithA3(str: String?): Boolean {
     - 코틀린은 자바처럼 암시적 타입 변환이 불가능하다.
 
         ```kotlin
-        	val number1 = 3;
+        val number1 = 3
         
-        val number2: Long = number1; //이건 에러가 난다.
-        val number2: Long = number1.toLong();
+        val number2: Long = number1 //이건 에러가 난다.
+        val number2: Long = number1.toLong()
         ```
 
 - **타입 캐스팅**
@@ -158,7 +158,7 @@ fun startWithA3(str: String?): Boolean {
         //null이 들어올 수 있8으면
         val person = obj as? Person
     
-    		//스마트 캐스트
+    	//스마트 캐스트 - 앞에서 검증이 됐기 때문에 as를 붙이지 않아도 자동으로 캐스팅을 해준다.
         if (obj is Person) {
             val person = obj //as Person
             println(person.age)
@@ -172,20 +172,19 @@ fun startWithA3(str: String?): Boolean {
     ```
 
 - 3가지 특이한 타입
-    - Any: 모든 객체의 최상위 타입
+    - **Any**: 모든 객체의 최상위 타입
         - Primitive 타입의 최상위 타입도 Any 타입.
         - null은 Any로 표현할 수 없어서 Any?로 표현해야한다.
-    - Unit: 반환값이 없는 함수의 반환 타입 (Java의 void와 유사)
+    - **Unit**: 반환값이 없는 함수의 반환 타입 (Java의 void와 유사)
         - Unit은 타입 인자로 사용이 가능하다. Java의 Void 클래스처럼
-    - Nothing: 함수가 정상적으로 끝나지 않았다는 것을 표현하는 타입
+    - **Nothing**: 함수가 정상적으로 끝나지 않았다는 것을 표현하는 타입
         - 무조건 예외를 반환한다는 함수 혹은 무한루프.
-
-      > 실제로는 거의 안쓴다.
+        > 실제로는 거의 안쓴다.
 
 
 - String interpolation / String indexing
     - Java에서는 StringBuilder, String.format()을 쓴다.
-    - ${변수}를 사용하면 된다
+    - Kotlin에서는 `${변수}`를 사용하면 된다
 
   > 간단한 변수를 쓸때는 중괄호를 생략하라고 공식 컨벤션에서 말하고 있다.
 
@@ -210,8 +209,8 @@ fun startWithA3(str: String?): Boolean {
 - 객체 비교
     - Java에서는 명시적으로 compareTo를 사용해야 비교가 가능했다면
       Kotlin에서는 자동으로 compareTo를 호출한다.
-    - === : 주소까지 검사
-    - == : equals 를 자동으로 호출한다.
+    - === : 주소까지 검사 (동일성)
+    - == : equals 를 자동으로 호출한다. (동등성)
 - 논리 연산자: Java와 완전히 동일하다.
 - 특이 연산자
     - in / !in: 컬렉션이나 범위에 포함되어 있다, 포함되어 있지 않다를 판단.
@@ -229,8 +228,9 @@ fun startWithA3(str: String?): Boolean {
 
 ### 5. 제어문을 다루는 방법
 
-- Expression과 Statement
-    - Statement는 프로그램의 문장으로, 어떤 동작을 수행하는 코드 단위이다. Expression은 값을 반환하는 코드 조각으로, Statement의 일부가 될 수 있다.
+- **Expression과 Statement**
+    - Statement는 프로그램의 문장으로, 어떤 동작을 수행하는 코드 단위이다. 
+    - Expression은 값을 반환하는 코드 조각으로, Statement의 일부가 될 수 있다.
     - 코틀린에서는 대부분의 제어 구조가 Expression으로 취급되어, 값을 반환하고 변수에 할당할 수 있다.
 - **if - else if - else문**: 코틀린에서는 Expression이다. 그렇기 때문에 삼항연산자가 존재하지 않고 아래와 같이 바로 반환할 수 있다.
 
@@ -323,9 +323,6 @@ fun startWithA3(str: String?): Boolean {
 
 - Progression & Range
     - Range클래스는 Progression 클래스를 상속받고 있음.
-
-      ![image.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/096d92bd-bad9-4c9d-a8f9-3ddf8ee1c923/3b390b2c-ff92-4e4d-ac8d-92e6e704cb7a/image.png)
-
     - 동작 과정
         - e.g) 1..3 → 1~3까지의 등차수열 클래스를 만들어 달라는 의미.
             1. 1~3까지의 등차 수열 생성
@@ -342,9 +339,8 @@ fun startWithA3(str: String?): Boolean {
 - Checked Exception & Unchecked Exception
     - 코틀린에서는 두가지를 구분하지 않는다.
 
-  > ***모두 Unchecked Exception이다.***
+> ***모두 Unchecked Exception이다.***
 
->
 
 - try with resources
     - 코틀린에는 try with resources가 없다.
