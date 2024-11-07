@@ -5,3 +5,4 @@ rootProject.name = "study-kotlin"
 include("advanced-kotlin:untitled")
 findProject(":advanced-kotlin:untitled")?.name = "untitled"
 include("kotlin-for-java-beginners")
+include("kotlin-in-action")
